@@ -11,11 +11,28 @@ import SnapKit
 
 class TopSearchView: UIView {
     
+    let tfContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+        
+        let searchIcon = UIImageView()
+        searchIcon.image = UIImage(named: "searchIcon")
+        view.addSubview(searchIcon)
+        searchIcon.snp.makeConstraints({ (make) in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(10)
+            make.width.height.equalTo(20)
+        })
+        
+        return view
+    }()
+    
     let textField: UITextField = {
         let textField = UITextField()
         textField.layer.cornerRadius = 4
-        textField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        textField.placeholder = "Type any word..."
+        textField.backgroundColor = .clear
+        textField.attributedPlaceholder = NSAttributedString(string: "Type any word...",
+                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         return textField
     }()
     
@@ -34,15 +51,32 @@ class TopSearchView: UIView {
     private func configure() {
         self.backgroundColor = #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1)
         
-        self.addSubview(textField)
+        self.addSubview(tfContainerView)
+        
+        textField.delegate = self
+        tfContainerView.addSubview(textField)
     }
     
     private func setAutolayout() {
-        textField.snp.makeConstraints { (make) in
-            make.top.equalTo(30)
-            make.leading.equalTo(20)
+        tfContainerView.snp.makeConstraints { (make) in
+            make.height.equalToSuperview().multipliedBy(0.45)
+            make.leading.equalTo(20).priority(500)
             make.trailing.equalTo(-20)
             make.bottom.equalTo(-12)
+            
+        }
+        
+        textField.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(40)
+            make.trailing.equalTo(-20)
         }
     }
+}
+
+
+// MARK: - UITextFieldDelegate
+
+extension TopSearchView: UITextFieldDelegate {
+    
 }
