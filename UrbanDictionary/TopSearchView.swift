@@ -155,8 +155,6 @@ extension TopSearchView: UITextFieldDelegate {
         
         textField.resignFirstResponder()
         
-        textFieldEndAnimate()
-        
         return true
     }
     

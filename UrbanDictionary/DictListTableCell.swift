@@ -51,6 +51,7 @@ class DictListTableCell: UITableViewCell {
         let label = UILabel()
         label.text = "ectweak"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -62,7 +63,7 @@ class DictListTableCell: UITableViewCell {
         return label
     }()
     
-    
+    let btnContainerView = ButtonView()
     
     let dateFormatter = DateFormatter()
     var dateString: Date?
@@ -88,6 +89,7 @@ class DictListTableCell: UITableViewCell {
         contentView.addSubview(authorLabel)
         contentView.addSubview(postDateLabel)
         contentView.addSubview(separatorView)
+        contentView.addSubview(btnContainerView)
     }
     
     private func setAutolayout() {
@@ -111,6 +113,7 @@ class DictListTableCell: UITableViewCell {
         authorLabel.snp.makeConstraints { (make) in
             make.top.equalTo(exampleLabel.snp.bottom).offset(20)
             make.leading.equalTo(20)
+            make.width.equalToSuperview().multipliedBy(0.6)
         }
         
         postDateLabel.snp.makeConstraints { (make) in
@@ -118,8 +121,15 @@ class DictListTableCell: UITableViewCell {
             make.trailing.equalTo(-20)
         }
         
-        separatorView.snp.makeConstraints { (make) in
+        btnContainerView.snp.makeConstraints { (make) in
             make.top.equalTo(authorLabel.snp.bottom).offset(20)
+            make.leading.equalTo(20)
+            make.width.equalToSuperview().multipliedBy(0.6)
+            make.height.equalTo(50)
+        }
+        
+        separatorView.snp.makeConstraints { (make) in
+            make.top.equalTo(btnContainerView.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(5)
         }
@@ -138,16 +148,46 @@ class DictListTableCell: UITableViewCell {
         let finalDateFormatter = DateFormatter()
         finalDateFormatter.dateFormat = "MMM d, yyyy"
         postDateLabel.text = finalDateFormatter.string(from: date)
+        
+        btnContainerView.thumbsUpBtn.setTitle(String(listData.thumbsUp), for: .normal)
+        btnContainerView.thumbsDownBtn.setTitle(String(listData.thumbsDown), for: .normal)
     }
 }
 
 
 class ButtonView: UIView {
-    let btnContainerView: UIView = {
-        let view = UIView()
-        return view
+
+    let thumbsUpBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .white
+        btn.setImage(UIImage(named: "thumbsUp"), for: .normal)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
+        btn.imageView?.contentMode = .scaleAspectFit
+        btn.contentHorizontalAlignment = .left
+       
+        btn.setTitle("502", for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
+        
+        
+        return btn
     }()
     
+    let thumbsDownBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .white
+        btn.setImage(UIImage(named: "thumbsDown"), for: .normal)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
+        btn.imageView?.contentMode = .scaleAspectFit
+        btn.contentHorizontalAlignment = .left
+       
+        btn.setTitle("185", for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
+        return btn
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -160,11 +200,31 @@ class ButtonView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func configure() {
+        self.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+        self.layer.cornerRadius = 25
         
+        thumbsUpBtn.layer.cornerRadius = 20
+        thumbsUpBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        self.addSubview(thumbsUpBtn)
+        
+        thumbsDownBtn.layer.cornerRadius = 20
+        thumbsDownBtn.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        self.addSubview(thumbsDownBtn)
     }
     
     private func setAutolayout() {
+        thumbsUpBtn.snp.makeConstraints { (make) in
+            make.top.leading.equalTo(3)
+            make.bottom.equalTo(-3)
+            make.width.equalToSuperview().multipliedBy(0.48)
+        }
         
+        thumbsDownBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(3)
+            make.bottom.trailing.equalTo(-3)
+            make.width.equalToSuperview().multipliedBy(0.48)
+        }
     }
 }

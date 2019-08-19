@@ -71,8 +71,9 @@ class MainViewController: UIViewController {
     
     private func getServerData(word: String) {
         let urlString = basicUrl + word
+        let newUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
-        guard let apiURL = URL(string: urlString) else { print("wrong url!"); return }
+        guard let apiURL = URL(string: newUrlString) else { print("wrong url!"); return }
 
         let dataTask = URLSession.shared.dataTask(with: apiURL) { (data, response, error) in
             guard error == nil else { print("error"); return }
