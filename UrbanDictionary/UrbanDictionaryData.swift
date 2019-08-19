@@ -23,6 +23,8 @@ struct List: Codable {
     let defid: Int
     let currentVote, writtenOn, example: String
     let thumbsDown: Int
+//    var writtenDate = Date()
+//    var finalDateString = ""
     
     enum CodingKeys: String, CodingKey {
         case definition, permalink
@@ -33,5 +35,6 @@ struct List: Codable {
         case writtenOn = "written_on"
         case example
         case thumbsDown = "thumbs_down"
+//        case finalDateString
     }
 }

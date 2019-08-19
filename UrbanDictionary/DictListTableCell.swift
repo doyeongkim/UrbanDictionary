@@ -58,9 +58,14 @@ class DictListTableCell: UITableViewCell {
         let label = UILabel()
         label.text = "Aug 6, 2005"
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
         return label
     }()
+    
+    
+    
+    let dateFormatter = DateFormatter()
+    var dateString: Date?
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -118,5 +123,48 @@ class DictListTableCell: UITableViewCell {
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(5)
         }
+    }
+    
+    func setData(listData: List) {
+        wordLabel.text = listData.word
+        definitionLabel.text = listData.definition
+        exampleLabel.text = listData.example
+        authorLabel.text = listData.author
+        
+        // date formatter
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = self.dateFormatter.date(from: listData.writtenOn) ?? Date()
+        
+        let finalDateFormatter = DateFormatter()
+        finalDateFormatter.dateFormat = "MMM d, yyyy"
+        postDateLabel.text = finalDateFormatter.string(from: date)
+    }
+}
+
+
+class ButtonView: UIView {
+    let btnContainerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configure()
+        setAutolayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        
+    }
+    
+    private func setAutolayout() {
+        
     }
 }

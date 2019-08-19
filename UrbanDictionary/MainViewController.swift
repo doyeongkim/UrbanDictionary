@@ -23,6 +23,13 @@ class MainViewController: UIViewController {
         return tableView
     }()
     
+    let decoder = JSONDecoder()
+    let basicUrl = "http://api.urbandictionary.com/v0/define?term="
+    var listArray = [List]()
+    
+    let dateFormatter = DateFormatter()
+    var dateString: Date?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +49,7 @@ class MainViewController: UIViewController {
     private func configure() {
         view.backgroundColor = .white
         
+        topSearchView.delegate = self
         view.addSubview(topSearchView)
         
         tableView.dataSource = self
@@ -60,17 +68,52 @@ class MainViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    private func getServerData(word: String) {
+        let urlString = basicUrl + word
+        
+        guard let apiURL = URL(string: urlString) else { print("wrong url!"); return }
+
+        let dataTask = URLSession.shared.dataTask(with: apiURL) { (data, response, error) in
+            guard error == nil else { print("error"); return }
+            guard let data = data else { print("data error"); return }
+
+            do {
+                let listObject = try? self.decoder.decode(UrbanDictionaryData.self, from: data)
+                self.listArray = listObject?.list ?? []
+//                print("listArray: ", self.listArray)
+
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        dataTask.resume()
+    }
 }
 
 
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return listArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dictListCell = tableView.dequeueReusableCell(withIdentifier: DictListTableCell.identifier, for: indexPath) as! DictListTableCell
+        
+        dictListCell.setData(listData: listArray[indexPath.row])
+        
         return dictListCell
+    }
+}
+
+// MARK: - TopSearchViewDelegate
+extension MainViewController: TopSearchViewDelegate {
+    func searchWord(wordString: String) {
+        getServerData(word: wordString)
     }
 }
