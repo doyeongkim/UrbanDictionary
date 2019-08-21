@@ -16,6 +16,9 @@
 		8DB2A96E23069FB0007BB549 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB2A96D23069FAF007BB549 /* MainViewController.swift */; };
 		8DB2A9702306A25D007BB549 /* TopSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB2A96F2306A25D007BB549 /* TopSearchView.swift */; };
 		8DB2A9722306A706007BB549 /* DictListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB2A9712306A706007BB549 /* DictListTableCell.swift */; };
+		DB3838C7230D131300F8BC47 /* SearchingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3838C6230D131300F8BC47 /* SearchingTableView.swift */; };
+		DB3838C9230D154600F8BC47 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3838C8230D154600F8BC47 /* SearchTableCell.swift */; };
+		DB3838CB230D277C00F8BC47 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3838CA230D277C00F8BC47 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		8DB2A96D23069FAF007BB549 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8DB2A96F2306A25D007BB549 /* TopSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSearchView.swift; sourceTree = "<group>"; };
 		8DB2A9712306A706007BB549 /* DictListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictListTableCell.swift; sourceTree = "<group>"; };
+		DB3838C6230D131300F8BC47 /* SearchingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingTableView.swift; sourceTree = "<group>"; };
+		DB3838C8230D154600F8BC47 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
+		DB3838CA230D277C00F8BC47 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +94,10 @@
 				8DB2A95B2305B333007BB549 /* ViewController.swift */,
 				8DB2A96D23069FAF007BB549 /* MainViewController.swift */,
 				8DB2A9712306A706007BB549 /* DictListTableCell.swift */,
+				DB3838C6230D131300F8BC47 /* SearchingTableView.swift */,
+				DB3838C8230D154600F8BC47 /* SearchTableCell.swift */,
 				8DB2A96F2306A25D007BB549 /* TopSearchView.swift */,
+				DB3838CA230D277C00F8BC47 /* Extension.swift */,
 				8DB2A96B2305B638007BB549 /* UrbanDictionaryData.swift */,
 				8DB2A9602305B336007BB549 /* Assets.xcassets */,
 				8DB2A9622305B336007BB549 /* LaunchScreen.storyboard */,
@@ -211,11 +220,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB3838CB230D277C00F8BC47 /* Extension.swift in Sources */,
 				8DB2A95C2305B333007BB549 /* ViewController.swift in Sources */,
 				8DB2A95A2305B333007BB549 /* AppDelegate.swift in Sources */,
 				8DB2A9722306A706007BB549 /* DictListTableCell.swift in Sources */,
 				8DB2A96C2305B638007BB549 /* UrbanDictionaryData.swift in Sources */,
+				DB3838C7230D131300F8BC47 /* SearchingTableView.swift in Sources */,
 				8DB2A9702306A25D007BB549 /* TopSearchView.swift in Sources */,
+				DB3838C9230D154600F8BC47 /* SearchTableCell.swift in Sources */,
 				8DB2A96E23069FB0007BB549 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,7 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = GNQ9UN7JV8;
 				INFOPLIST_FILE = UrbanDictionary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -375,7 +387,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = GNQ9UN7JV8;
 				INFOPLIST_FILE = UrbanDictionary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

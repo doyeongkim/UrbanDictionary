@@ -11,6 +11,8 @@ import SnapKit
 
 protocol TopSearchViewDelegate: class {
     func searchWord(wordString: String)
+    func bringSearchTableViewToFront()
+    func sendSearchTableViewToBack()
 }
 
 
@@ -40,6 +42,8 @@ class TopSearchView: UIView {
         let textField = UITextField()
         textField.backgroundColor = .clear
         textField.returnKeyType = UIReturnKeyType.search
+        textField.clearButtonMode = .whileEditing
+        textField.font = UIFont.systemFont(ofSize: 15)
         textField.attributedPlaceholder = NSAttributedString(string: "Type any word...",
                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         return textField
@@ -73,6 +77,7 @@ class TopSearchView: UIView {
         self.addSubview(tfContainerView)
         
         textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         tfContainerView.addSubview(textField)
         
         backBtn.addTarget(self, action: #selector(backBtnDidTap(_:)), for: .touchUpInside)
@@ -90,7 +95,8 @@ class TopSearchView: UIView {
         }
         
         textField.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
             make.leading.equalTo(40)
             make.trailing.equalTo(-20)
         }
@@ -106,6 +112,13 @@ class TopSearchView: UIView {
         textField.resignFirstResponder()
         
         textFieldEndAnimate()
+        
+        delegate?.sendSearchTableViewToBack()
+    }
+    
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        
     }
     
     private func textFieldStartAnimate() {
@@ -147,10 +160,10 @@ class TopSearchView: UIView {
 
 extension TopSearchView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         guard textField.text != "" else { return true }
         
         let text = textField.text ?? ""
-        
         delegate?.searchWord(wordString: text)
         
         textField.resignFirstResponder()
@@ -158,11 +171,14 @@ extension TopSearchView: UITextFieldDelegate {
         return true
     }
     
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
         print("text: ", text)
         
+        delegate?.bringSearchTableViewToFront()
+        
         textFieldStartAnimate()
     }
+    
+    
 }

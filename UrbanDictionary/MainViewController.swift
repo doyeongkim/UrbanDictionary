@@ -12,6 +12,7 @@ import SnapKit
 class MainViewController: UIViewController {
 
     let topSearchView = TopSearchView()
+    let searchTableView = SearchingTableView()
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -26,10 +27,7 @@ class MainViewController: UIViewController {
     let decoder = JSONDecoder()
     let basicUrl = "http://api.urbandictionary.com/v0/define?term="
     var listArray = [List]()
-    
-    let dateFormatter = DateFormatter()
-    var dateString: Date?
-    
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +52,9 @@ class MainViewController: UIViewController {
         
         tableView.dataSource = self
         view.addSubview(tableView)
+        
+        view.addSubview(searchTableView)
+        view.sendSubviewToBack(searchTableView)
     }
     
     private func setAutolayout() {
@@ -66,6 +67,11 @@ class MainViewController: UIViewController {
             make.top.equalTo(topSearchView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        searchTableView.snp.makeConstraints { (make) in
+            make.top.equalTo(topSearchView.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -116,5 +122,13 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: TopSearchViewDelegate {
     func searchWord(wordString: String) {
         getServerData(word: wordString)
+    }
+    
+    func bringSearchTableViewToFront() {
+        self.view.bringSubviewToFront(searchTableView)
+    }
+    
+    func sendSearchTableViewToBack() {
+        self.view.sendSubviewToBack(searchTableView)
     }
 }
