@@ -118,7 +118,8 @@ class TopSearchView: UIView {
     
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        
+        print("text: ", text)
+        delegate?.searchWord(wordString: text)
     }
     
     private func textFieldStartAnimate() {

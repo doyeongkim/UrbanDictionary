@@ -26,8 +26,10 @@ class MainViewController: UIViewController {
     
     let decoder = JSONDecoder()
     let basicUrl = "http://api.urbandictionary.com/v0/define?term="
-    var listArray = [List]()
   
+    var listArray = [List]()
+    var randomWordListArray = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +77,14 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func getRandom5Word() -> [String] {
+        randomWordListArray.removeAll()
+        
+        let wordList = ["tap water", "and i oop-", "well up", "Crick", "fuck-you friday", "a thing", "unemployee", "windjammer", "big cap", "number neighbor", "Settler", "G Code", "genderqueer", "primetiming", "death drop"]
+        
+        return randomWordListArray
+    }
+    
     private func getServerData(word: String) {
         let urlString = basicUrl + word
         let newUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -88,10 +98,14 @@ class MainViewController: UIViewController {
             do {
                 let listObject = try? self.decoder.decode(UrbanDictionaryData.self, from: data)
                 self.listArray = listObject?.list ?? []
+                self.searchTableView.listArray = self.listArray
 //                print("listArray: ", self.listArray)
 
+                print("listArray: ", self.searchTableView.listArray)
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.searchTableView.tableView.reloadData()
                 }
                 
             } catch {

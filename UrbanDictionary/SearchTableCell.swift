@@ -50,4 +50,10 @@ class SearchTableCell: UITableViewCell {
             make.bottom.equalTo(-20)
         }
     }
+    
+    func setData(listData: List) {
+        labelInTableWhileSearching.maxLength(first: listData.word,
+                                        second: "- \(listData.definition)",
+                                        length: 92)
+    }
 }

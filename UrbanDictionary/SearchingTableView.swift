@@ -28,6 +28,8 @@ class SearchingTableView: UIView {
         return tableView
     }()
     
+    var listArray = [List]()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,13 +42,19 @@ class SearchingTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure() {
-        self.backgroundColor = #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1)
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
+        print("listArray count: ", listArray.count)
+    }
+    
+    private func configure() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = footerView
         self.addSubview(tableView)
+        
+//        print("listArray count: ", listArray.count)
     }
     
     private func setAutolayout() {
@@ -60,11 +68,14 @@ class SearchingTableView: UIView {
 // MARK: - UITableViewDataSource
 extension SearchingTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return listArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier, for: indexPath) as! SearchTableCell
+        
+        cell.setData(listData: listArray[indexPath.row])
+        
         return cell
     }
 }
