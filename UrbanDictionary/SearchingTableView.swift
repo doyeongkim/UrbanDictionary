@@ -42,12 +42,7 @@ class SearchingTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        print("listArray count: ", listArray.count)
-    }
-    
+   
     private func configure() {
         tableView.dataSource = self
         tableView.delegate = self

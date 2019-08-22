@@ -36,6 +36,8 @@ class MainViewController: UIViewController {
 
         configure()
         setAutolayout()
+        
+        getRandom5Word()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,10 +84,16 @@ class MainViewController: UIViewController {
         
         let wordList = ["tap water", "and i oop-", "well up", "Crick", "fuck-you friday", "a thing", "unemployee", "windjammer", "big cap", "number neighbor", "Settler", "G Code", "genderqueer", "primetiming", "death drop"]
         
+        for _ in 0...4 {
+            randomWordListArray.append(wordList.randomElement() ?? "")
+        }
+        
+        print(randomWordListArray)
+        
         return randomWordListArray
     }
     
-    private func getServerData(word: String) {
+    private func getServerData(word: String, completion: @escaping () -> ()) {
         let urlString = basicUrl + word
         let newUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
@@ -102,11 +110,8 @@ class MainViewController: UIViewController {
 //                print("listArray: ", self.listArray)
 
                 print("listArray: ", self.searchTableView.listArray)
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.searchTableView.tableView.reloadData()
-                }
+                completion()
+               
                 
             } catch {
                 print(error.localizedDescription)
@@ -134,10 +139,21 @@ extension MainViewController: UITableViewDataSource {
 
 // MARK: - TopSearchViewDelegate
 extension MainViewController: TopSearchViewDelegate {
-    func searchWord(wordString: String) {
-        getServerData(word: wordString)
+    func searchWord(wordString: String, searchCase: SearchCases) {
+        getServerData(word: wordString) {
+            DispatchQueue.main.async {
+                switch searchCase {
+                case .inMain:
+                    self.tableView.reloadData()
+                    self.view.sendSubviewToBack(self.searchTableView)
+                    
+                case .inSearch:
+                    self.searchTableView.tableView.reloadData()
+                }
+            }
+        }
     }
-    
+
     func bringSearchTableViewToFront() {
         self.view.bringSubviewToFront(searchTableView)
     }

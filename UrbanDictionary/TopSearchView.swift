@@ -10,11 +10,14 @@ import UIKit
 import SnapKit
 
 protocol TopSearchViewDelegate: class {
-    func searchWord(wordString: String)
+    func searchWord(wordString: String, searchCase: SearchCases)
     func bringSearchTableViewToFront()
     func sendSearchTableViewToBack()
 }
 
+enum SearchCases {
+    case inMain, inSearch
+}
 
 class TopSearchView: UIView {
     
@@ -118,8 +121,7 @@ class TopSearchView: UIView {
     
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        print("text: ", text)
-        delegate?.searchWord(wordString: text)
+        delegate?.searchWord(wordString: text, searchCase: .inSearch)
     }
     
     private func textFieldStartAnimate() {
@@ -165,9 +167,10 @@ extension TopSearchView: UITextFieldDelegate {
         guard textField.text != "" else { return true }
         
         let text = textField.text ?? ""
-        delegate?.searchWord(wordString: text)
+        delegate?.searchWord(wordString: text, searchCase: .inMain)
         
         textField.resignFirstResponder()
+        textFieldEndAnimate()
         
         return true
     }
