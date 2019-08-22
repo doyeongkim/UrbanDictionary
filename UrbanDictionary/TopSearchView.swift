@@ -183,6 +183,4 @@ extension TopSearchView: UITextFieldDelegate {
         
         textFieldStartAnimate()
     }
-    
-    
 }
