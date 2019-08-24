@@ -124,7 +124,7 @@ class TopSearchView: UIView {
         delegate?.searchWord(wordString: text, searchCase: .inSearch)
     }
     
-    private func textFieldStartAnimate() {
+    func textFieldStartAnimate() {
         containerViewLeading = tfContainerView.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 8)
         
         UIView.animate(withDuration: 0.3, delay: 0.0, options: [], animations: {
@@ -142,7 +142,7 @@ class TopSearchView: UIView {
         }
     }
     
-    private func textFieldEndAnimate() {
+    func textFieldEndAnimate() {
         UIView.animateKeyframes(withDuration: 0.6, delay: 0.0, options: [], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.3, animations: {
                 self.backBtn.layer.opacity = 0

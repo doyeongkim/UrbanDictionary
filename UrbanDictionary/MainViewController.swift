@@ -91,6 +91,7 @@ class MainViewController: UIViewController {
 
     private func getRandomData() {
         switch currentType {
+        
         case .main:
             
             generateRandom5Word()
@@ -105,12 +106,14 @@ class MainViewController: UIViewController {
                     }
                 }
             }
+            
         case .push:
             getServerData(word: wordText) { list in
                 self.randomListArray = list
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.topSearchView.textFieldStartAnimate()
                 }
             }
         }
@@ -198,6 +201,7 @@ extension MainViewController: TopSearchViewDelegate {
         
         getServerData(word: wordString) { list in
             DispatchQueue.main.async {
+                
                 switch searchCase {
                 
                 case .inMain:
@@ -209,7 +213,7 @@ extension MainViewController: TopSearchViewDelegate {
                     self.navigationController?.pushViewController(mainVC, animated: true)
                     
                 case .inSearch:
-                    self.searchTableView.listArray.removeAll()
+//                    print("wordstring: ", wordString)
                     self.searchTableView.listArray = list
                     self.searchTableView.tableView.reloadData()
                 }
@@ -223,5 +227,8 @@ extension MainViewController: TopSearchViewDelegate {
     
     func sendSearchTableViewToBack() {
         self.view.sendSubviewToBack(searchTableView)
+        
+        // 전에 vc로 돌아갔을때 backBtn 에니메이션 작동안함
+        navigationController?.popViewController(animated: true)
     }
 }
