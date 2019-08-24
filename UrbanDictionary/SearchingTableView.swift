@@ -48,8 +48,6 @@ class SearchingTableView: UIView {
         tableView.delegate = self
         tableView.tableFooterView = footerView
         self.addSubview(tableView)
-        
-//        print("listArray count: ", listArray.count)
     }
     
     private func setAutolayout() {

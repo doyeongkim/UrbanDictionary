@@ -14,9 +14,6 @@ class SearchTableCell: UITableViewCell {
     
     let labelInTableWhileSearching: UILabel = {
         let label = UILabel()
-//        label.text = """
-//        FF - One of it's meanings is a league term for Forfeit. It's commonly used as a league term meaning to surrenderk, also because to surrender one of the commands can be ff.
-//""".maxLength(length: 96)
         label.numberOfLines = 0
         
         return label
@@ -36,9 +33,9 @@ class SearchTableCell: UITableViewCell {
     
     private func configure() {
         self.selectionStyle = .none
-        labelInTableWhileSearching.maxLength(first: "FF ",
-                                        second: "- One of it's meanings is a league term for Forfeit. It's commonly used as a league term meaning to surrenderk, also because to surrender one of the commands can be ff.",
-                                        length: 92)
+//        labelInTableWhileSearching.maxLength(first: "FF ",
+//                                        second: "- One of it's meanings is a league term for Forfeit. It's commonly used as a league term meaning to surrenderk, also because to surrender one of the commands can be ff.",
+//                                        length: 92)
         contentView.addSubview(labelInTableWhileSearching)
     }
     

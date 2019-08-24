@@ -21,27 +21,19 @@ class DictListTableCell: UITableViewCell {
     let wordLabel: UILabel = {
         let label = UILabel()
         label.text = "zomg"
-        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.font = UIFont.boldSystemFont(ofSize: 27)
         return label
     }()
     
     let definitionLabel: UILabel = {
         let label = UILabel()
-        label.text = """
-        zOMG is a varient of the all-too-popular acronym "OMG", meaning "Oh My God".
-        
-        The "z" was originally a mistake white attempting to hit the shift key with the left hand, and type "OMG"
-        """
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15.5, weight: .regular)
         label.numberOfLines = 0
         return label
     }()
     
     let exampleLabel: UILabel = {
         let label = UILabel()
-        label.text = """
-        "zOMG! you r teh winz!!one!!eleven!"
-        """
         label.font = UIFont.italicSystemFont(ofSize: 15)
         label.numberOfLines = 0
         return label
@@ -49,7 +41,6 @@ class DictListTableCell: UITableViewCell {
     
     let authorLabel: UILabel = {
         let label = UILabel()
-        label.text = "ectweak"
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.numberOfLines = 0
         return label
@@ -57,7 +48,6 @@ class DictListTableCell: UITableViewCell {
     
     let postDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "Aug 6, 2005"
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
         return label
@@ -79,6 +69,7 @@ class DictListTableCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func configure() {
         self.selectionStyle = .none
@@ -165,9 +156,8 @@ class ButtonView: UIView {
         btn.imageView?.contentMode = .scaleAspectFit
         btn.contentHorizontalAlignment = .left
        
-        btn.setTitle("502", for: .normal)
         btn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
         
         
@@ -182,9 +172,8 @@ class ButtonView: UIView {
         btn.imageView?.contentMode = .scaleAspectFit
         btn.contentHorizontalAlignment = .left
        
-        btn.setTitle("185", for: .normal)
         btn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
         return btn
     }()

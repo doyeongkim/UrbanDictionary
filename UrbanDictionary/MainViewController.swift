@@ -209,6 +209,7 @@ extension MainViewController: TopSearchViewDelegate {
                     self.navigationController?.pushViewController(mainVC, animated: true)
                     
                 case .inSearch:
+                    self.searchTableView.listArray.removeAll()
                     self.searchTableView.listArray = list
                     self.searchTableView.tableView.reloadData()
                 }
