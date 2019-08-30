@@ -40,6 +40,11 @@ class MainViewController: UIViewController {
     
     var currentType = VCType.main
     
+    let noti = NotificationCenter.default
+    var floatingTableViewConst: NSLayoutConstraint?
+    var downTableViewConst: NSLayoutConstraint?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,6 +52,7 @@ class MainViewController: UIViewController {
         setAutolayout()
         
         getRandomData()
+        addKeyboardNotificationObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +90,8 @@ class MainViewController: UIViewController {
         
         searchTableView.snp.makeConstraints { (make) in
             make.top.equalTo(topSearchView.snp.bottom)
-            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).priority(500)
         }
     }
     
@@ -171,6 +178,42 @@ class MainViewController: UIViewController {
         }
         dataTask.resume()
     }
+    
+    private func addKeyboardNotificationObserver() {
+        noti.addObserver(self, selector: #selector(didReceiveKeyboardNoti(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        noti.addObserver(self, selector: #selector(didReceiveKeyboardNoti(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    
+    @objc private func didReceiveKeyboardNoti(_ sender: Notification) {
+        guard let userInfo = sender.userInfo,
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+            let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+            else { return }
+        
+        let guide = view.safeAreaLayoutGuide
+        
+        floatingTableViewConst = searchTableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -keyboardFrame.height)
+        floatingTableViewConst?.priority = .defaultLow
+        floatingTableViewConst?.isActive = true
+        
+        downTableViewConst = searchTableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
+        downTableViewConst?.priority = .defaultLow
+        downTableViewConst?.isActive = true
+        
+        if keyboardFrame.minY >= view.frame.maxY {
+            UIView.animate(withDuration: duration) {
+                self.downTableViewConst?.priority = .defaultHigh
+            }
+            self.view.layoutIfNeeded()
+            
+        } else {
+            UIView.animate(withDuration: duration) {
+                self.floatingTableViewConst?.priority = .defaultHigh
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
 }
 
 
@@ -188,7 +231,7 @@ extension MainViewController: UITableViewDataSource {
         if indexPath.row == randomListArray.count - 1 {
             dictListCell.separatorView.backgroundColor = .clear
         } else {
-            dictListCell.separatorView.backgroundColor = #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 1)
+            dictListCell.separatorView.backgroundColor = #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1)
         }
         
         return dictListCell
