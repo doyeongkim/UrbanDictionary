@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7A5F37E96E976353C654F78D /* Pods_UrbanDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E88FC58B9D32DC05DF732E /* Pods_UrbanDictionary.framework */; };
 		8DB2A95A2305B333007BB549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB2A9592305B333007BB549 /* AppDelegate.swift */; };
-		8DB2A95C2305B333007BB549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB2A95B2305B333007BB549 /* ViewController.swift */; };
 		8DB2A9612305B336007BB549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DB2A9602305B336007BB549 /* Assets.xcassets */; };
 		8DB2A9642305B336007BB549 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DB2A9622305B336007BB549 /* LaunchScreen.storyboard */; };
 		8DB2A96C2305B638007BB549 /* UrbanDictionaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB2A96B2305B638007BB549 /* UrbanDictionaryData.swift */; };
@@ -27,7 +26,6 @@
 		84E88FC58B9D32DC05DF732E /* Pods_UrbanDictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UrbanDictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB2A9562305B333007BB549 /* UrbanDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UrbanDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB2A9592305B333007BB549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8DB2A95B2305B333007BB549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8DB2A9602305B336007BB549 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DB2A9632305B336007BB549 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DB2A9652305B336007BB549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,19 +89,50 @@
 			isa = PBXGroup;
 			children = (
 				8DB2A9592305B333007BB549 /* AppDelegate.swift */,
-				8DB2A95B2305B333007BB549 /* ViewController.swift */,
-				8DB2A96D23069FAF007BB549 /* MainViewController.swift */,
-				8DB2A9712306A706007BB549 /* DictListTableCell.swift */,
-				DB3838C6230D131300F8BC47 /* SearchingTableView.swift */,
-				DB3838C8230D154600F8BC47 /* SearchTableCell.swift */,
-				8DB2A96F2306A25D007BB549 /* TopSearchView.swift */,
-				DB3838CA230D277C00F8BC47 /* Extension.swift */,
-				8DB2A96B2305B638007BB549 /* UrbanDictionaryData.swift */,
+				DB3838D0231AA98D00F8BC47 /* Model */,
+				DB3838D1231AA99E00F8BC47 /* View */,
+				DB3838D2231AA9A700F8BC47 /* Controller */,
+				DB3838D3231AAA3900F8BC47 /* Extension */,
 				8DB2A9602305B336007BB549 /* Assets.xcassets */,
 				8DB2A9622305B336007BB549 /* LaunchScreen.storyboard */,
 				8DB2A9652305B336007BB549 /* Info.plist */,
 			);
 			path = UrbanDictionary;
+			sourceTree = "<group>";
+		};
+		DB3838D0231AA98D00F8BC47 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DB2A96B2305B638007BB549 /* UrbanDictionaryData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DB3838D1231AA99E00F8BC47 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8DB2A96F2306A25D007BB549 /* TopSearchView.swift */,
+				8DB2A9712306A706007BB549 /* DictListTableCell.swift */,
+				DB3838C6230D131300F8BC47 /* SearchingTableView.swift */,
+				DB3838C8230D154600F8BC47 /* SearchTableCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DB3838D2231AA9A700F8BC47 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8DB2A96D23069FAF007BB549 /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DB3838D3231AAA3900F8BC47 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DB3838CA230D277C00F8BC47 /* Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +250,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB3838CB230D277C00F8BC47 /* Extension.swift in Sources */,
-				8DB2A95C2305B333007BB549 /* ViewController.swift in Sources */,
 				8DB2A95A2305B333007BB549 /* AppDelegate.swift in Sources */,
 				8DB2A9722306A706007BB549 /* DictListTableCell.swift in Sources */,
 				8DB2A96C2305B638007BB549 /* UrbanDictionaryData.swift in Sources */,

@@ -100,7 +100,6 @@ class MainViewController: UIViewController {
         switch currentType {
         
         case .main:
-            
             generateRandom5Word()
             
             for i in 0..<randomWordListArray.count {
@@ -257,6 +256,7 @@ extension MainViewController: TopSearchViewDelegate {
                     
                 case .inSearch:
 //                    print("wordstring: ", wordString)
+                    print("list: ", list)
                     self.searchTableView.listArray = list
                     self.searchTableView.tableView.reloadData()
                 }
