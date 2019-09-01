@@ -255,8 +255,12 @@ extension MainViewController: TopSearchViewDelegate {
                     self.navigationController?.pushViewController(mainVC, animated: true)
                     
                 case .inSearch:
-//                    print("wordstring: ", wordString)
                     print("list: ", list)
+                    guard wordString != "" else {
+                        self.searchTableView.listArray.removeAll()
+                        self.searchTableView.tableView.reloadData()
+                        return
+                    }
                     self.searchTableView.listArray = list
                     self.searchTableView.tableView.reloadData()
                 }

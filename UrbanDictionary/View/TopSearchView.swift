@@ -122,6 +122,10 @@ class TopSearchView: UIView {
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         delegate?.searchWord(wordString: text, searchCase: .inSearch)
+        
+//        changeSearchBarState(searchBarState: .includingText)
+        
+//        changeSearchBarState(searchBarState: .noText)
     }
     
     func textFieldStartAnimate() {
@@ -156,6 +160,23 @@ class TopSearchView: UIView {
             // do sth later
         }
     }
+    
+    enum SearchBarState {
+        case includingText
+        case noText
+        case startTime
+        case enterPressed
+    }
+    
+//    private func changeSearchBarState(searchBarState: SearchBarState) {
+//        switch searchBarState {
+//            case .includingText
+//        case .enterPressed: <#code#>
+//        case .noText: <#code#>
+//        case .startTime: <#code#>
+//        }
+//
+//    }
 }
 
 

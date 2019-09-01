@@ -67,6 +67,8 @@ extension SearchingTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier, for: indexPath) as! SearchTableCell
         
+        print("# indexPath: ", indexPath.row," / title: ", listArray[indexPath.row].word," / des: ", listArray[indexPath.row].definition)
+        
         cell.setData(listData: listArray[indexPath.row])
         
         return cell

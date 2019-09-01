@@ -15,7 +15,6 @@ class SearchTableCell: UITableViewCell {
     let labelInTableWhileSearching: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        
         return label
     }()
     
@@ -31,11 +30,9 @@ class SearchTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func configure() {
         self.selectionStyle = .none
-//        labelInTableWhileSearching.maxLength(first: "FF ",
-//                                        second: "- One of it's meanings is a league term for Forfeit. It's commonly used as a league term meaning to surrenderk, also because to surrender one of the commands can be ff.",
-//                                        length: 92)
         contentView.addSubview(labelInTableWhileSearching)
     }
     
@@ -52,5 +49,7 @@ class SearchTableCell: UITableViewCell {
         labelInTableWhileSearching.maxLength(first: listData.word,
                                         second: "- \(listData.definition)",
                                         length: 92)
+        
+        print("wordLabel: ", listData.word, " / des: ", listData.definition)
     }
 }
